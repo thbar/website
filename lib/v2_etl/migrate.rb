@@ -36,6 +36,12 @@ module V2ETL
 
       # Final reload for anything that might come after, such as tests
       reload!
+
+      # TODO: Remove this.
+      u = User.find(1530)
+      u.update(email: 'ihid@exercism.io')
+      u.confirm
+      u.update(password: "password")
     end
 
     def pre_create_tables!
@@ -131,6 +137,7 @@ module V2ETL
       # This is worth doing last as it's the least likely to fail
       # and the least damanging if it does.
       process_tracks
+      process_user_tracks
 
       # TODO: Populate users.github_usernames via GH API
 

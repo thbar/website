@@ -16,7 +16,7 @@ module V2ETL
         SELECT
           UUID(),
           solutions.id,
-          1,
+          0,
           "", "",
           solutions.mentoring_requested_at, solutions.mentoring_requested_at
         FROM solutions
