@@ -51,7 +51,11 @@ module API
     end
   end
 
+<<<<<<< HEAD
   # TOOD: Merge into the other identical place
+=======
+  # TOOD: Merge itno the other identical place
+>>>>>>> 54c4dbf2 (Cope with missing requests)
   class MentorRequestComment
     include ActiveModel::Model
 
@@ -59,8 +63,14 @@ module API
 
     def self.from(discussion)
       mentor_request = discussion.request
+<<<<<<< HEAD
       return nil unless mentor_request
       return nil if mentor_request.comment_html.blank?
+=======
+      # TODO: Add tests
+      return nil unless mentor_request
+      return nil if mentor_request.comment_html.present?
+>>>>>>> 54c4dbf2 (Cope with missing requests)
 
       if discussion.posts.any?
         iteration_idx = discussion.posts.first.iteration_idx
