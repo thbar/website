@@ -20,6 +20,7 @@ module V2ETL
 
         # Other adds
         add_column :requires_student_action_since, :datetime
+        add_column :num_posts, limit:3, null: false, default: 0
 
         # Remove unused
         remove_column :show_feedback_to_mentor
@@ -53,6 +54,8 @@ module V2ETL
         add_foreign_key :mentor_requests, column: :request_id
 
         migrate_statuses!
+
+        # TODO: Populate num_posts
       end
 
       def migrate_statuses!
