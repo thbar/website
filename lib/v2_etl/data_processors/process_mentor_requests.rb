@@ -24,6 +24,8 @@ module V2ETL
         FROM solutions
         INNER JOIN exercises on exercises.id = solutions.exercise_id
         WHERE mentoring_requested_at IS NOT NULL
+        AND approved_by_id IS NULL
+        AND completed_AT IS NULL
         SQL
 
         # Mark as fullfiled any requests where there's a discussion

@@ -20,7 +20,7 @@ module V2ETL
 
         # Other adds
         add_column :requires_student_action_since, :datetime
-        add_column :num_posts, limit:3, null: false, default: 0
+        add_column :num_posts, :integer, limit: 3, null: false, default: 0
 
         # Remove unused
         remove_column :show_feedback_to_mentor
@@ -65,8 +65,12 @@ module V2ETL
         add_column :finished_by, :tinyint
 
         # Mark Approved as completed
-        approved_solutions = Solution.where.not(approved_by_id: nil)
+        approved_solutions = Solution.where.not(completed_at: nil)
         Mentor::Discussion.where(solution: approved_solutions).update_all(status: :finished)
+
+        # Mark Approved as completed
+        approved_solutions = Solution.where.not(approved_by_id: nil)
+        Mentor::Discussion.where(solution: approved_solutions).update_all(status: :mentor_finished)
 
         # Mark abandoned as completed
         model.where(abandoned: true).update_all(status: :finished)

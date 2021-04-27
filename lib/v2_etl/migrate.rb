@@ -38,10 +38,12 @@ module V2ETL
       reload!
 
       # TODO: Remove this.
-      u = User.find(1530)
-      u.update(email: 'ihid@exercism.io')
-      u.confirm
-      u.update(password: "password")
+      u = User.find_by(id: 1530)
+      if u
+        u.update(email: 'ihid@exercism.io')
+        u.confirm
+        u.update(password: "password")
+      end
     end
 
     def pre_create_tables!
@@ -86,6 +88,7 @@ module V2ETL
       create_submission_representations
 
       create_mentor_requests
+      create_mentor_request_locks
       create_mentor_discussion_posts
       create_mentor_testimonials
       create_mentor_student_relationships
