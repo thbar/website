@@ -8,9 +8,9 @@ module V2ETL
     def call
       return if Rails.env.production?
 
-      `mysql -u root -e "drop database small_website_etl"`
-      `mysql -u root -e "create database small_website_etl"`
-      `mysql -u root small_website_etl < small-dump-for-v3-etl.sql`
+      # `mysql -u root -e "drop database small_website_etl"`
+      # `mysql -u root -e "create database small_website_etl"`
+      # `mysql -u root small_website_etl < small-dump-for-v3-etl.sql`
 
       # Disable foreign key checks for speed
       ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS=0")

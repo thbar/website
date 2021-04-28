@@ -5,7 +5,7 @@ module V2ETL
 
       def call
         fix_uuids!
-        sync_tracks!
+        sync_tracks! # TODO
       end
 
       def fix_uuids!
@@ -16,10 +16,10 @@ module V2ETL
           track.exercises.where(uuid: old).update_all(uuid: new)
         end
 
-        Exercise.find_by(track: Track.find_by_slug("javascript"), slug: "ozans-playlist").update(uuid: "347692fb-7b0f-4ef0-9a02-2192b59bdf5d")
-        Exercise.find_by(track: Track.find_by_slug("javascript"), slug: "sets").update(uuid: "84e55c29-d403-4a90-8a2a-9960feae8ff3")
-        Exercise.find_by(track: Track.find_by_slug("zig"), slug: "secret-handshake").update(uuid: "ba0ab298-3fb4-47e1-87f0-0644a405502e")
-        Exercise.find_by(track: Track.find_by_slug("zig"), slug: "isogram").update(uuid: "93a9b5bd-b495-4a7d-86fe-b71fd0343336")
+        Exercise.where(track: Track.find_by_slug("javascript"), slug: "ozans-playlist").update_all(uuid: "347692fb-7b0f-4ef0-9a02-2192b59bdf5d")
+        Exercise.where(track: Track.find_by_slug("javascript"), slug: "sets").update_all(uuid: "84e55c29-d403-4a90-8a2a-9960feae8ff3")
+        Exercise.where(track: Track.find_by_slug("zig"), slug: "secret-handshake").update_all(uuid: "ba0ab298-3fb4-47e1-87f0-0644a405502e")
+        Exercise.where(track: Track.find_by_slug("zig"), slug: "isogram").update_all(uuid: "93a9b5bd-b495-4a7d-86fe-b71fd0343336")
       end
 
       def sync_tracks!
