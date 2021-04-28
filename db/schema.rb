@@ -192,25 +192,9 @@ ActiveRecord::Schema.define(version: 20_200_721_124_114) do
     t.string "turquoise_icon_url"
     t.string "white_icon_url"
     t.string "title", null: false
-<<<<<<< HEAD
-    t.string "blurb", limit: 350
-    t.integer "difficulty", limit: 1, default: 1, null: false
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.integer "status", limit: 1, default: 0, null: false
-=======
-=======
-    t.boolean "deprecated", default: true, null: false
-=======
     t.boolean "core", default: false, null: false
     t.boolean "active", default: true, null: false
     t.boolean "auto_approve", default: false, null: false
->>>>>>> aab978e8 (Get things working end-to-end)
-=======
-    t.boolean "core", default: false, null: false
-    t.boolean "active", default: true, null: false
-    t.boolean "auto_approve", default: false, null: false
->>>>>>> 894cee93 (Bring things up to latest spec)
     t.text "blurb"
     t.text "description"
     t.integer "difficulty", default: 1, null: false
@@ -219,32 +203,6 @@ ActiveRecord::Schema.define(version: 20_200_721_124_114) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "median_wait_time"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.string "type", null: false
->>>>>>> 21929105 (Continue ETL work)
-<<<<<<< HEAD
->>>>>>> 8feea5f6 (Continue ETL work)
-=======
-=======
-    t.string "blurb", limit: 350
->>>>>>> 4cafc210 (Update things)
->>>>>>> 888b61cf (Update things)
-=======
->>>>>>> 86fc79b9 (WIP)
-    t.string "git_sha", null: false
-    t.string "synced_to_git_sha", null: false
-    t.integer "position", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["track_id", "uuid"], name: "index_exercises_on_track_id_and_uuid", unique: true
-    t.index ["track_id"], name: "index_exercises_on_track_id"
-    t.index ["uuid"], name: "index_exercises_on_uuid"
-  end
-
-  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "slug", null: false
-=======
     t.index ["track_id"], name: "fk_rails_a796d89c21"
     t.index ["unlocked_by_id"], name: "fk_rails_03ec4ffbf3"
   end
@@ -270,7 +228,6 @@ ActiveRecord::Schema.define(version: 20_200_721_124_114) do
   create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
                                     force: :cascade do |t|
     t.string "slug", limit: 190, null: false
->>>>>>> 894cee93 (Bring things up to latest spec)
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope", limit: 190

@@ -24,16 +24,13 @@ module V2ETL
         remove_column :length
         remove_column :unlocked_by_id
         remove_column :description
-
-        # TODO: When we support WIP etc this will probably change
-        # Rename the column and reverse the values
-        rename_column :active, :deprecated
-        Exercise.update_all("deprecated = !deprecated")
+        remove_column :deprecated
 
         # These should all get set by the syncer
         add_non_nullable_column :type, :string, "'PracticeExercise'"
         add_non_nullable_column :git_sha, :string, "''"
         add_non_nullable_column :synced_to_git_sha, :string, "''"
+        add_column :status, :tinyint, null: false, default: 2
 
         # TODO: Run this at the end of the fix script for this
         # Then switch these out
