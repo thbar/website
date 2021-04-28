@@ -34,14 +34,8 @@ module V2ETL
         ).update_all(status: :fulfilled)
 
         Mentor::Discussion.joins("INNER JOIN mentor_requests ON mentor_discussions.solution_id = mentor_requests.solution_id").
-        update_all("request_id = mentor_requests.id")
-
-        # TODO: Uncomment these
-        # connection.remove_column :solutions, :approved_by_id
-        # connection.remove_column :solutions, :completed_at
-        # connection.remove_column :solutions, :mentoring_requested_at
-     end
+          update_all("request_id = mentor_requests.id")
+      end
     end
   end
 end
-

@@ -10,6 +10,9 @@ class Mentor::Request < ApplicationRecord
 
   has_many :locks, class_name: "Mentor::RequestLock", dependent: :destroy
 
+  # Needed for deletion
+  has_many :discussions, dependent: :nullify
+
   has_one :discussion,
     inverse_of: :request,
     dependent: :nullify

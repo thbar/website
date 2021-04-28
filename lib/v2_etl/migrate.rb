@@ -132,10 +132,12 @@ module V2ETL
       process_mentor_discussion_posts
       process_mentor_requests
       process_mentor_student_relationships
+      process_anonymous_mode
 
       # This needs to come after the mentor migrations as
       # it uses their values to determine status
       process_solutions
+      process_activities
 
       # This is worth doing last as it's the least likely to fail
       # and the least damanging if it does.

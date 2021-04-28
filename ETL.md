@@ -6,9 +6,9 @@ This is how to do v2 - v3 ETL
 1. Load data into mysql
 
 ```bash
-mysql -u root -e "drop database website_etl"
-mysql -u root -e "create database website_etl"
-mysql -u root website_etl < ../dump-for-v3-etl.sql
+mysql -u root -e "drop database website_etl2"
+mysql -u root -e "create database website_etl2"
+mysql -u root website_etl2 < ../dump-for-v3-etl.sql
 ```
 
 2. Run ETL
