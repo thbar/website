@@ -26,3 +26,4 @@ rails r 'require_relative Rails.root.join("lib/v2_etl/migrate"); V2ETL::Migrate.
 5. Import GitHub Usernames
 6. `bundle exec rake sync_pull_requests_reputation`
 7. `bundle exec rake sync_authors_and_contributors`
+8. Iteration.find_each {|i|GenerateIterationSnippetJob.perform_later(i)}
