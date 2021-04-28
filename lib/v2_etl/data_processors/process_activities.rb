@@ -26,27 +26,27 @@ module V2ETL
         # INNER JOIN exercises on exercises.id = solutions.exercise_id
         # SQL
 
-        # puts "Adding started exercise activities"
-        # ActiveRecord::Base.connection.execute(<<-SQL)
-        # INSERT INTO user_activities (
-        #   type,
-        #   user_id, track_id, exercise_id, solution_id,
-        #   params,
-        #   uniqueness_key,
-        #   version, rendering_data_cache,
-        #   occurred_at, created_at, updated_at
-        # )
-        # SELECT
-        #   "User::Activities::StartedExerciseActivity",
-        #   user_id, track_id, exercise_id, solutions.id,
-        #   "{}",
-        #   CONCAT(user_id, "|started_exercise|Solution#", solutions.id),
-        #   1, "{}",
-        #   solutions.downloaded_at, solutions.downloaded_at, solutions.downloaded_at
-        # FROM solutions
-        # INNER JOIN exercises on exercises.id = solutions.exercise_id
-        # WHERE solutions.downloaded_at IS NOT NULL
-        # SQL
+        puts "Adding started exercise activities"
+        ActiveRecord::Base.connection.execute(<<-SQL)
+        INSERT INTO user_activities (
+          type,
+          user_id, track_id, exercise_id, solution_id,
+          params,
+          uniqueness_key,
+          version, rendering_data_cache,
+          occurred_at, created_at, updated_at
+        )
+        SELECT
+          "User::Activities::StartedExerciseActivity",
+          user_id, track_id, exercise_id, solutions.id,
+          "{}",
+          CONCAT(user_id, "|started_exercise|Solution#", solutions.id),
+          1, "{}",
+          solutions.downloaded_at, solutions.downloaded_at, solutions.downloaded_at
+        FROM solutions
+        INNER JOIN exercises on exercises.id = solutions.exercise_id
+        WHERE solutions.downloaded_at IS NOT NULL
+        SQL
 
         # puts "Adding completed exercise activities"
         # ActiveRecord::Base.connection.execute(<<-SQL)

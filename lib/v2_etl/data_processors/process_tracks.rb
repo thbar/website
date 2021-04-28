@@ -5,7 +5,7 @@ module V2ETL
 
       def call
         fix_uuids!
-        sync_tracks! # TODO
+        # sync_tracks! # TODO
       end
 
       def fix_uuids!

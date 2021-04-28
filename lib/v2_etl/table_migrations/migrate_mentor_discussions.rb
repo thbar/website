@@ -66,15 +66,18 @@ module V2ETL
         add_column :finished_by, :tinyint
 
         # Mark Approved as completed
-        approved_solutions = Solution.where.not(completed_at: nil)
-        Mentor::Discussion.where(solution: approved_solutions).update_all(status: :finished)
+        completed_solutions = Solution.where.not(completed_at: nil)
+        Mentor::Discussion.where(status: 0).where(solution: completed_solutions).update_all(status: :finished)
 
         # Mark Approved as completed
         approved_solutions = Solution.where.not(approved_by_id: nil)
-        Mentor::Discussion.where(solution: approved_solutions).update_all(status: :mentor_finished)
+        Mentor::Discussion.where(status: 0).where(solution: approved_solutions).update_all(status: :mentor_finished)
 
         # Mark abandoned as completed
-        model.where(abandoned: true).update_all(status: :finished)
+        model.where(status: 0).where(abandoned: true).update_all(status: :finished)
+
+        # Mark as awaiting mentor
+        model.where(status: 0).where.not(awaiting_mentor_since: nil).update_all(status: :awaiting_mentor)
 
         # TODO: Use variable for times
         Mentor::Discussion.where(status: :finished).update_all(

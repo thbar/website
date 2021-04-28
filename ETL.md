@@ -1,5 +1,9 @@
 # ETL
 
+## TODOs
+
+- Add index to users.uid for Erik's usersnames script
+
 This is how to do v2 - v3 ETL
 
 0. Change config/database.yml
