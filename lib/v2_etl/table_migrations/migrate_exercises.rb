@@ -24,7 +24,7 @@ module V2ETL
         remove_column :length
         remove_column :unlocked_by_id
         remove_column :description
-        remove_column :deprecated
+        remove_column :active
 
         # These should all get set by the syncer
         add_non_nullable_column :type, :string, "'PracticeExercise'"

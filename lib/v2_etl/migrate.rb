@@ -141,8 +141,8 @@ module V2ETL
 
       # This is worth doing last as it's the least likely to fail
       # and the least damanging if it does.
-      process_tracks
-      process_user_tracks
+      # process_tracks
+      # process_user_tracks
 
       # TODO: Populate users.github_usernames via GH API
 
