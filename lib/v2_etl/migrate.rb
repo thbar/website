@@ -27,6 +27,7 @@ module V2ETL
       reload!
 
       migrate_data!
+      reload!
 
       # Bring the schema migrations table up to daet
       update_schema_migrations!

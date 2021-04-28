@@ -1,6 +1,6 @@
 module V2ETL
   module DataProcessors
-    class ProcessActivties
+    class ProcessActivities
       include Mandate
 
       def call
@@ -38,8 +38,8 @@ module V2ETL
         )
         SELECT
           "User::Activities::StartedExerciseActivity",
-          user_id, track_id, exercise_id, solution_id,
-          "{}"
+          user_id, track_id, exercise_id, solutions.id,
+          "{}",
           CONCAT(user_id, "|started_exercise|Solution#", solutions.id),
           1, "{}",
           solutions.downloaded_at, solutions.downloaded_at, solutions.downloaded_at
@@ -60,8 +60,8 @@ module V2ETL
         )
         SELECT
           "User::Activities::CompletedExerciseActivity",
-          user_id, track_id, exercise_id, solution_id,
-          "{}"
+          user_id, track_id, exercise_id, solutions.id,
+          "{}",
           CONCAT(user_id, "|completed_exercise|Solution#", solutions.id),
           1, "{}",
           solutions.completed_at, solutions.completed_at, solutions.completed_at
@@ -69,9 +69,6 @@ module V2ETL
         INNER JOIN exercises on exercises.id = solutions.exercise_id
         WHERE solutions.completed_at IS NOT NULL
         SQL
-
-
-
       end
     end
   end

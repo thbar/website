@@ -270,55 +270,6 @@ ActiveRecord::Schema.define(version: 20_200_721_124_114) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  create_table "mentor_discussions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.bigint "solution_id", null: false
-    t.bigint "mentor_id", null: false
-    t.bigint "request_id"
-    t.integer "status", limit: 1, default: 0, null: false
-    t.integer "rating", limit: 1
-    t.integer "num_posts", limit: 3, default: 0, null: false
-    t.boolean "anonymous_mode", default: false, null: false
-    t.datetime "awaiting_student_since"
-    t.datetime "awaiting_mentor_since"
-    t.datetime "finished_at"
-    t.integer "finished_by", limit: 1
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["mentor_id"], name: "index_mentor_discussions_on_mentor_id"
-    t.index ["request_id"], name: "index_mentor_discussions_on_request_id"
-    t.index ["solution_id"], name: "index_mentor_discussions_on_solution_id"
-=======
-  create_table "iteration_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
-                                  force: :cascade do |t|
-    t.bigint "iteration_id", null: false
-    t.string "filename", null: false
-    t.binary "file_contents", null: false
-    t.text "file_contents_digest", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["iteration_id"], name: "fk_rails_56b435457f"
->>>>>>> 1161c086 (Bring things up to latest spec)
-=======
-  create_table "mentor_discussion_posts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.bigint "discussion_id", null: false
-    t.bigint "iteration_id", null: false
-    t.bigint "user_id", null: false
-    t.text "content_markdown", null: false
-    t.text "content_html", null: false
-    t.boolean "seen_by_student", default: false, null: false
-    t.boolean "seen_by_mentor", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["discussion_id"], name: "index_mentor_discussion_posts_on_discussion_id"
-    t.index ["iteration_id"], name: "index_mentor_discussion_posts_on_iteration_id"
-    t.index ["user_id"], name: "index_mentor_discussion_posts_on_user_id"
->>>>>>> 49fb1e80 (Flatten migrations)
-=======
   create_table "iteration_analyses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
                                      force: :cascade do |t|
     t.bigint "iteration_id", null: false
@@ -329,7 +280,6 @@ ActiveRecord::Schema.define(version: 20_200_721_124_114) do
     t.string "website_error"
     t.string "analysis_status"
     t.index ["iteration_id"], name: "fk_rails_c60c42383b"
->>>>>>> abffc206 (WIP)
   end
 
   create_table "iteration_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",

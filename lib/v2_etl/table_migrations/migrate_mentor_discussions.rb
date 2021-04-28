@@ -21,6 +21,7 @@ module V2ETL
         # Other adds
         add_column :requires_student_action_since, :datetime
         add_column :num_posts, :integer, limit: 3, null: false, default: 0
+        add_column :anonymous_mode, :boolean, null: false, default: false
 
         # Remove unused
         remove_column :show_feedback_to_mentor

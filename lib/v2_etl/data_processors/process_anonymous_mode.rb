@@ -20,7 +20,7 @@ module V2ETL
             user_tracks.track_id = exercises.track_id"
           ).
           where('user_tracks.anonymous': true).
-          update_all(anonymous_mode: true)
+          update_all('anonymous_mode': true)
 
         UserTrack.connection.remove_column :user_tracks, :anonymous
       end
