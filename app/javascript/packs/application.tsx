@@ -622,6 +622,9 @@ initReact({
       defaultReputation={data.reputation}
     />
   ),
+  'dropdowns-track-menu': (data: any) => (
+    <Dropdowns.TrackMenu track={data.track} links={data.links} />
+  ),
   'common-copy-to-clipboard-button': (data: any) => (
     <Common.CopyToClipboardButton textToCopy={data.text_to_copy} />
   ),
