@@ -15,7 +15,7 @@ module V2ETL
             connection.execute(<<-SQL)
             INSERT INTO user_reputation_tokens (
               uuid, type,
-              user_id,
+              user_id, exercise_id, track_id,
               params,
               uniqueness_key,
               version, rendering_data_cache, value, reason, category,
@@ -24,8 +24,8 @@ module V2ETL
             )
             SELECT
             UUID(), "User::ReputationTokens::PublishedSolutionToken",
-            user_id,
-            CONCAT('{"discussion": "gid://website/PracticeSolution/', solutions.id, '"}'),
+            user_id, solutions.exercise_id, exercises.track_id,
+            CONCAT('{"solution": "gid://website/PracticeSolution/', solutions.id, '"}'),
             CONCAT(user_id, "|published_solution|Solution#", solutions.id),
             1, "{}", #{value}, "published_solution", "publishing",
             "#{level}",

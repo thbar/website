@@ -8,7 +8,7 @@ module V2ETL
         connection.execute(<<-SQL)
         INSERT INTO user_reputation_tokens (
           uuid, type,
-          user_id,
+          user_id, exercise_id, track_id,
           params,
           uniqueness_key,
           version, rendering_data_cache, value, reason, category,
@@ -16,13 +16,15 @@ module V2ETL
         )
         SELECT
         UUID(), "User::ReputationTokens::MentoredToken",
-        mentor_id,
+        mentor_id, exercise_id, track_id,
         CONCAT('{"discussion": "gid://website/Mentor::Discussion/', mentor_discussions.id, '"}'),
         CONCAT(mentor_id, "|mentored|Discussion#", mentor_discussions.id),
         1, "{}", 5, "mentored", "mentoring",
         NOW(), NOW()
         FROM mentor_discussions
-        WHERE status = 4 AND (
+        INNER JOIN solutions on solutions.id = mentor_discussions.solution_id
+        INNER JOIN exercises on solutions.exercise_id = exercises.id
+        WHERE mentor_discussions.status = 4 AND (
           rating IS NULL 
           OR rating = 3
           OR rating = 4
