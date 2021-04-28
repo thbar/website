@@ -6,25 +6,29 @@ module V2ETL
       def call
         connection = ActiveRecord::Base.connection
         connection.execute(<<-SQL)
-        INSERT INTO mentor_requests (
-          uuid,
-          solution_id,
-          track_id, exercise_id, student_id,
-          status,
-          comment_markdown, comment_html,
+        INSERT INTO user_reputation_tokens (
+          uuid, type,
+          user_id,
+          params,
+          uniqueness_key,
+          version, rendering_data_cache, value, reason, category,
           created_at, updated_at
         )
         SELECT
+        UUID(), "User::ReputationTokens::MentoredToken",
+        mentor_id,
+        CONCAT('{"discussion": "gid://website/Mentor::Discussion/', mentor_discussions.id, '"}'),
+        CONCAT(mentor_id, "|mentored|Discussion#", mentor_discussions.id),
+        1, "{}", 5, "mentored", "mentoring",
+        NOW(), NOW()
         FROM mentor_discussions
-        INNER JOIN exercises on exercises.id = solutions.exercise_id
-        WHERE mentoring_requested_at IS NOT NULL
-        AND approved_by_id IS NULL
-        AND completed_AT IS NULL
+        WHERE status = 4 AND (
+          rating IS NULL 
+          OR rating = 3
+          OR rating = 4
+          OR rating = 5
+        )
         SQL
-        # MentorDiscussion.where(status: finished).
-        #   where.not(rating: [1,2]).
-        #   each do |discussion|
-        #   end
       end
     end
   end

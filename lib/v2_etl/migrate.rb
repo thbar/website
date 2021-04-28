@@ -140,15 +140,20 @@ module V2ETL
       process_solutions
       process_activities
 
+      process_mentoring_reputation
+      process_publishing_reputation
+      process_users
+
       # This is worth doing last as it's the least likely to fail
       # and the least damanging if it does.
-      # process_tracks
+      process_tracks
       # process_user_tracks
 
       # TODO: Populate users.github_usernames via GH API
 
       # TODO: Migrate users.is_mentor to users.became_mentor_at
       # based on the first solution_mentorship
+
     end
 
     def method_missing(meth) # rubocop:disable Style/MissingRespondToMissing
