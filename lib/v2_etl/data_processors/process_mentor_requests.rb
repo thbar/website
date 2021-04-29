@@ -28,6 +28,11 @@ module V2ETL
         AND completed_AT IS NULL
         SQL
 
+        # Delete requests where the person hasn't iterated (?!)
+        Mentor::Request.where(
+          solution_id: Solution.where("NOT EXISTS(SELECT TRUE FROM iterations WHERE iterations.solution_id = solutions.id)")
+        ).delete_all
+
         # Mark as fullfiled any requests where there's a discussion
         Mentor::Request.where(
           solution_id: Mentor::Discussion.select(:solution_id)
