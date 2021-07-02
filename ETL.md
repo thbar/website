@@ -27,3 +27,25 @@ rails r 'require_relative Rails.root.join("lib/v2_etl/migrate"); V2ETL::Migrate.
 6. `bundle exec rake sync_pull_requests_reputation`
 7. `bundle exec rake sync_authors_and_contributors`
 8. Iteration.find_each {|i|GenerateIterationSnippetJob.perform_later(i)}
+9. Fix submission filenames
+
+```
+# Create regular expression to match one of the track slugs
+track_slugs = Track.pluck(:slug).map {|slug| Regexp.escape(slug)}
+track_slug_regex_match = "(#{track_slugs.join('|')})"
+
+files_to_upsert = []
+
+Submission::File.find_each do |file|
+    sanitized_file = file.filename
+    .gsub(/\\+/, '/') # Replace one or more consecutive backslashes with one slash
+    .gsub(/.*?\/#{track_slug_regex_match}\/[^\/]+\/(.+)/, '\2') # Strip off everything before and including the <track>/<exercise> part of the path
+    .gsub(/^\//, '') # Remove leading slash
+
+    next if file.filename == sanitized_file
+
+    files_to_upsert << file.attributes.symbolize_keys.merge(filename: sanitized_file)
+end
+
+Submission::File.upsert_all(files_to_upsert)
+```
