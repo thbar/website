@@ -38,17 +38,6 @@ Rails.application.routes.draw do
       resources :tracks, only: [:show]
     end
 
-    # TODO: This is just a stub
-    resources :users, only: [:update]
-    #
-    # TODO: Stub controller
-    resources :user_tracks, only: [] do
-      member do
-        post :reset
-        post :leave
-      end
-    end
-
     resource :journey_overview, only: [:show], controller: "journey_overview"
 
     scope :v2 do # rubocop:disable Naming/VariableNumber
@@ -70,10 +59,16 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :tracks, only: %i[index show] do
-        patch 'activate_practice_mode' => "user_tracks#activate_practice_mode"
-        patch 'deactivate_practice_mode' => "user_tracks#deactivate_practice_mode"
+      resources :tracks, only: [], controller: "user_tracks" do
+        member do
+          patch :activate_practice_mode
+          patch :activate_learning_mode
+          patch :reset
+          patch :leave
+        end
+      end
 
+      resources :tracks, only: %i[index show] do
         resources :exercises, only: %i[index], controller: "exercises" do
           resources :makers, only: [:index], controller: "exercises/makers"
           resources :community_solutions, only: [:index], controller: "community_solutions" do
