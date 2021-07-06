@@ -249,6 +249,7 @@ export type StudentTrack = {
 
 export type Track = {
   id: string
+  slug: string
   title: string
   iconUrl: string
   numConcepts: number

@@ -10,6 +10,8 @@ class SerializeTrack
   def call
     {
       id: track.slug,
+      # TODO: This will be resolved once exercise/website#215 is merged.
+      slug: track.slug,
       title: track.title,
       num_concepts: user_track.num_concepts,
       num_exercises: user_track.num_exercises,
