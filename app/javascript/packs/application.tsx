@@ -52,6 +52,7 @@ import '../../css/components/docs-side-nav'
 import '../../css/components/docs-tracks-list'
 import '../../css/components/iterations-footer'
 import '../../css/components/solution-iterations'
+import '../../css/components/loading-overlay'
 
 import '../../css/components/share-panel'
 import '../../css/components/split-pane'
@@ -488,6 +489,18 @@ import { highlightAll } from '../utils/highlight'
 
 document.addEventListener('turbolinks:load', () => {
   highlightAll()
+})
+
+document.addEventListener('turbolinks:visit', () => {
+  const overlay = document.querySelector('.loading-overlay')
+
+  overlay?.classList.add('--loading')
+})
+
+document.addEventListener('turbolinks:load', () => {
+  const overlay = document.querySelector('.loading-overlay')
+
+  overlay?.classList.remove('--loading')
 })
 
 const images = require.context('../images', true)
