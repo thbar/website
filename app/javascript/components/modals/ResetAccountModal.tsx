@@ -6,6 +6,7 @@ import { useIsMounted } from 'use-is-mounted'
 import { FormButton } from '../common'
 import { ErrorBoundary, ErrorMessage } from '../ErrorBoundary'
 import { useConfirmation } from '../../hooks/use-confirmation'
+import Turbolinks from 'turbolinks'
 
 type APIResponse = {
   links: {
@@ -35,7 +36,7 @@ export const ResetAccountModal = ({
     },
     {
       onSuccess: (response) => {
-        window.location.replace(response.links.home)
+        Turbolinks.visit(response.links.home, { action: 'replace' })
       },
     }
   )

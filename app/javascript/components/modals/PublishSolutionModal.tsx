@@ -8,6 +8,7 @@ import { useIsMounted } from 'use-is-mounted'
 import { FormButton } from '../common'
 import { ErrorMessage, ErrorBoundary } from '../ErrorBoundary'
 import { IterationSelector } from './student/IterationSelector'
+import Turbolinks from 'turbolinks'
 
 const DEFAULT_ERROR = new Error('Unable to publish solution')
 
@@ -34,7 +35,7 @@ export const PublishSolutionModal = ({
     },
     {
       onSuccess: (solution) => {
-        window.location.replace(solution.privateUrl)
+        Turbolinks.visit(solution.privateUrl, { action: 'replace' })
       },
     }
   )

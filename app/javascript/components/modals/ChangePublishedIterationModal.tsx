@@ -8,6 +8,7 @@ import { useIsMounted } from 'use-is-mounted'
 import { FormButton } from '../common'
 import { ErrorMessage, ErrorBoundary } from '../ErrorBoundary'
 import { IterationSelector } from './student/IterationSelector'
+import Turbolinks from 'turbolinks'
 
 const DEFAULT_ERROR = new Error('Unable to change published iteration')
 export type RedirectType = 'public' | 'private'
@@ -42,9 +43,9 @@ export const ChangePublishedIterationModal = ({
     {
       onSuccess: (solution) => {
         if (redirectType == 'public') {
-          window.location.replace(solution.publicUrl)
+          Turbolinks.visit(solution.publicUrl, { action: 'replace' })
         } else {
-          window.location.replace(solution.privateUrl)
+          Turbolinks.visit(solution.privateUrl, { action: 'replace' })
         }
       },
     }

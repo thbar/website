@@ -9,6 +9,7 @@ import { SolutionForStudent } from '../../types'
 import { typecheck } from '../../../utils/typecheck'
 import { DiffViewer } from './DiffViewer'
 import { Tab, TabContext } from '../../common/Tab'
+import Turbolinks from 'turbolinks'
 
 const DEFAULT_ERROR = new Error('Unable to update exercise')
 
@@ -40,7 +41,7 @@ export const ExerciseUpdateForm = ({
     },
     {
       onSuccess: (solution) => {
-        window.location.replace(solution.privateUrl)
+        Turbolinks.visit(solution.privateUrl, { action: 'replace' })
       },
     }
   )

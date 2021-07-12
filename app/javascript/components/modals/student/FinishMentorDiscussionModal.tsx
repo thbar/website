@@ -10,6 +10,7 @@ import { SatisfiedStep } from './finish-mentor-discussion-modal/SatisfiedStep'
 import { ReportStep } from './finish-mentor-discussion-modal/ReportStep'
 import { useMachine } from '@xstate/react'
 import { Machine } from 'xstate'
+import Turbolinks from 'turbolinks'
 
 export type Links = {
   exercise: string
@@ -91,7 +92,7 @@ const Inner = ({
           onRequeued={() => send('REQUEUED')}
           onBack={() => send('BACK')}
           onNotRequeued={() => {
-            window.location.replace(links.exercise)
+            Turbolinks.visit(links.exercise, { action: 'replace' })
           }}
         />
       )

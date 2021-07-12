@@ -7,6 +7,7 @@ import { typecheck } from '../../utils/typecheck'
 import { SolutionForStudent } from '../types'
 import { FormButton } from '../common'
 import { ErrorBoundary, ErrorMessage } from '../ErrorBoundary'
+import Turbolinks from 'turbolinks'
 
 const DEFAULT_ERROR = new Error('Unable to unpublish solution')
 
@@ -28,7 +29,7 @@ export const UnpublishSolutionModal = ({
     },
     {
       onSuccess: (solution) => {
-        window.location.replace(solution.privateUrl)
+        Turbolinks.visit(solution.privateUrl, { action: 'replace' })
       },
     }
   )
